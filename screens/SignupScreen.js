@@ -12,7 +12,7 @@ function SignupScreen() {
     try {
       await createUser(email, password)
     } catch(error) {
-      Alert.alert('Could not signup')
+      Alert.alert('Could not create user, please try again later')
     }
     
     setIsAuthenticating(false)
