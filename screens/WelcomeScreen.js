@@ -1,16 +1,20 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { AuthContext } from '../store/auth-context';
 
 function WelcomeScreen() {
   const [messageNode, setMessageNode] = useState('')
 
+  const {token} = useContext(AuthContext)
+
+
   useEffect(() => {
-    axios.get('https://native-authentication-49111-default-rtdb.firebaseio.com/message.json').
+    axios.get('https://native-authentication-49111-default-rtdb.firebaseio.com/message.json?auth=' + token).
     then((response) => {
       setMessageNode(response.data)
     })
-  }, [])
+  }, [token])
 
   return (
     <View style={styles.rootContainer}>
