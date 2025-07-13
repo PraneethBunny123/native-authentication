@@ -6,14 +6,15 @@ import { AuthContext } from '../store/auth-context';
 function WelcomeScreen() {
   const [messageNode, setMessageNode] = useState('')
 
-  const {token} = useContext(AuthContext)
-
-
+  const authCtx = useContext(AuthContext)
+  const token = authCtx.token._j
+  
   useEffect(() => {
-    axios.get('https://native-authentication-49111-default-rtdb.firebaseio.com/message.json?auth=' + token).
+    axios.get(`https://native-authentication-49111-default-rtdb.firebaseio.com/message.json?auth=${token}`).
     then((response) => {
       setMessageNode(response.data)
     })
+    console.log(token)
   }, [token])
 
   return (
